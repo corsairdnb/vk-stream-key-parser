@@ -1,14 +1,12 @@
-const puppeteer = require('puppeteer');
+const fs = require('fs');
+const start = require('./crawler');
 
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto('https://vk.com');
-
-  await page.$eval('input[name=email]', (el) => (el.value = ''));
-  await page.$eval('input[name=pass]', (el) => (el.value = ''));
-  await page.click('#index_login_button');
-  await page.screenshot({ path: 'example.png' });
-
-  await browser.close();
-})();
+fs.readFile('.credentials', { encoding: 'utf8' }, async (err, data) => {
+  if (err) {
+    return console.log(err);
+  }
+  const credentials = data.toString().split('\n');
+  const email = credentials[0].trim();
+  const password = credentials[1].trim();
+  await start({ email, password });
+});

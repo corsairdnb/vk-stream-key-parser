@@ -3,5 +3,6 @@ node_modules
 .DS_Store
 .idea
 npm-debug.log.*
-example.png
+screenshot.png
 .credentials
+.results
