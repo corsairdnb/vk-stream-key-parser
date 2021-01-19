@@ -15,6 +15,7 @@ const streamKeySelector = '#video_live_trans_settings_key';
 module.exports = async ({ email, password }) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  await page.setViewport({ width: 800, height: 1000 });
   await page.goto('https://vk.com');
 
   await page.click(emailVisibleSelector);
